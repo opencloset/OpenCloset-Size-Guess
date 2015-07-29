@@ -2,7 +2,7 @@ package OpenCloset::Size::Guess::Local;
 
 use Moo;
 
-with 'OpenCloset::Size::Guess';
+with 'OpenCloset::Size::Guess::Role::Base';
 
 has schema => ( is => 'ro', required => 1 );
 has cnt    => ( is => 'rw', default  => 0 );

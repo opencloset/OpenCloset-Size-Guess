@@ -1,4 +1,4 @@
-package OpenCloset::Size::Guess;
+package OpenCloset::Size::Guess::Role::Base;
 
 use utf8;
 use Moo::Role;

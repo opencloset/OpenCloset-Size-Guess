@@ -2,7 +2,7 @@ package OpenCloset::Size::Guess::BodyKit;
 
 use Moo;
 
-with 'OpenCloset::Size::Guess';
+with 'OpenCloset::Size::Guess::Role::Base';
 
 use HTTP::Tiny;
 use JSON;
