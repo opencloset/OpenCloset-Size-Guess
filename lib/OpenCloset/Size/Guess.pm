@@ -54,12 +54,9 @@ sub BUILDARGS {
         next if $key eq 'weight';
         next if $key eq 'gender';
 
-        delete $public_args{$key}
+        delete $public_args{$key};
     }
-    my $driver = $driver_class->new(
-        %public_args,
-        $class->_PRIVATE(@args),
-    );
+    my $driver = $driver_class->new( %public_args, $class->_PRIVATE(@args) );
     unless ( $driver->can('does') && $driver->does("${package}::Role::Base") ) {
         Carp::croak("$driver_class does not have ${package}::Role::Base role");
     }

@@ -6,9 +6,9 @@ use Types::Standard qw( Enum Int );
 
 our $VERSION = '0.001';
 
-has height => ( is  => 'rw', isa => Int );
-has weight => ( is  => 'rw', isa => Int );
-has gender => ( is  => 'rw', isa => Enum[qw( male female )] );
+has height => ( is => 'rw', isa => Int );
+has weight => ( is => 'rw', isa => Int );
+has gender => ( is => 'rw', isa => Enum [qw( male female )] );
 
 requires 'guess';
 
