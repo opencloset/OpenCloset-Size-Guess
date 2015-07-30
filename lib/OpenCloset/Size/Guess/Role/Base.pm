@@ -4,7 +4,7 @@ package OpenCloset::Size::Guess::Role::Base;
 use Moo::Role;
 use Types::Standard qw( Enum Int );
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 has height => ( is => 'rw', isa => Int );
 has weight => ( is => 'rw', isa => Int );
