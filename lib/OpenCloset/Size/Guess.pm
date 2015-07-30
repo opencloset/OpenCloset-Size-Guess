@@ -162,7 +162,7 @@ C<OpenCloset::Size::Guess> is intended to provide a driver-based single API for
 guessing body measurement size. The intent is to provide a single API against
 which to write the code to guess the body measurement information.
 
-C<OpenCloset::Size::Guess> drivers are installed seperately.
+C<OpenCloset::Size::Guess> drivers are installed separately.
 
 The design of this module is almost stolen from L<SMS::Send>.
 
@@ -215,13 +215,13 @@ It takes as its first parameter a driver name. These names map the class
 names. For example driver "Test" matches the testing driver
 L<OpenCloset::Size::Guess::Test>.
 
-Any additional params should be key/value pairs, split into two types.
+Any additional parameters should be key/value pairs, split into two types.
 
-Params without a leading underscore are "public" options and relate to
-standardised features within the L<OpenCloset::Size::Guess> API itself. At this
-time, there are no usable public options.
+Parameters without a leading underscore are "public" options and relate to
+standardized features within the L<OpenCloset::Size::Guess> API itself.
+At this time, there are no usable public options.
 
-Params B<with> a leading underscore are "private" driver-specific options
+Parameters B<with> a leading underscore are "private" driver-specific options
 and will be passed through to the driver B<without> the underscore.
 
     $guesser = OpenCloset::Size::Guess->new( 'MyDriver',

@@ -56,7 +56,7 @@ as a driver.
 
 =method guess
 
-Returns C<HASHREF> which contains information of body measurment size.
+Returns C<HASHREF> which contains information of body measurement size.
 C<HASHREF> MUST contain following key and value pairs.
 
 =for :list
