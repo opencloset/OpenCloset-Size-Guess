@@ -1,13 +1,19 @@
-requires "perl" => "5.008";
-requires "strict" => "0";
-requires "utf8" => "0";
-requires "warnings" => "0";
+requires "Carp" => "0";
+requires "Module::Runtime" => "0";
+requires "Moo" => "0";
+requires "Moo::Role" => "0";
+requires "Params::Util" => "0.14";
+requires "Try::Tiny" => "0";
+requires "Types::Standard" => "0";
+requires "perl" => "5.006";
 
 on 'test' => sub {
   requires "ExtUtils::MakeMaker" => "0";
   requires "File::Spec" => "0";
   requires "Test::More" => "0";
-  requires "perl" => "5.008";
+  requires "perl" => "5.006";
+  requires "strict" => "0";
+  requires "warnings" => "0";
 };
 
 on 'test' => sub {
@@ -16,7 +22,7 @@ on 'test' => sub {
 
 on 'configure' => sub {
   requires "ExtUtils::MakeMaker" => "6.17";
-  requires "perl" => "5.008";
+  requires "perl" => "5.006";
 };
 
 on 'develop' => sub {

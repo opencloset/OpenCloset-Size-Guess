@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 
-use 5.008;
+use 5.006;
 
 use ExtUtils::MakeMaker 6.17;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "OpenCloset size guess module",
+  "ABSTRACT" => "Driver-based API to guess proper body measurement",
   "AUTHOR" => "\x{d64d}\x{d615}\x{c11d} - Hyungsuk Hong <aanoaa\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.17"
@@ -14,17 +14,23 @@ my %WriteMakefileArgs = (
   "DISTNAME" => "OpenCloset-Size-Guess",
   "EXE_FILES" => [],
   "LICENSE" => "perl",
-  "MIN_PERL_VERSION" => "5.008",
+  "MIN_PERL_VERSION" => "5.006",
   "NAME" => "OpenCloset::Size::Guess",
   "PREREQ_PM" => {
-    "strict" => 0,
-    "utf8" => 0,
-    "warnings" => 0
+    "Carp" => 0,
+    "Module::Runtime" => 0,
+    "Moo" => 0,
+    "Moo::Role" => 0,
+    "Params::Util" => "0.14",
+    "Try::Tiny" => 0,
+    "Types::Standard" => 0
   },
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
-    "Test::More" => 0
+    "Test::More" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "VERSION" => "0.001",
   "test" => {
@@ -34,11 +40,17 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "Carp" => 0,
   "ExtUtils::MakeMaker" => "6.17",
   "File::Spec" => 0,
+  "Module::Runtime" => 0,
+  "Moo" => 0,
+  "Moo::Role" => 0,
+  "Params::Util" => "0.14",
   "Test::More" => 0,
+  "Try::Tiny" => 0,
+  "Types::Standard" => 0,
   "strict" => 0,
-  "utf8" => 0,
   "warnings" => 0
 );
 
