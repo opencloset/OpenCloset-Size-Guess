@@ -1,81 +1,72 @@
 package OpenCloset::Size::Guess::Role::Base;
+# ABSTRACT: OpenCloset::Size::Guess base role
 
-use utf8;
 use Moo::Role;
+use Types::Standard qw( Enum Int );
 
-has height => ( is => 'rw', required => 1 );
-has weight => ( is => 'rw', required => 1 );
-has gender => (
-    is  => 'rw',
-    isa => sub {
-        die "male or female only" unless $_[0] =~ /^(fe)?male$/i;
-    }
-);
+our $VERSION = '0.001';
 
-has belly    => ( is => 'rw', default => 0 );
-has topbelly => ( is => 'rw', default => 0 );
-has bust     => ( is => 'rw', default => 0 );
-has arm      => ( is => 'rw', default => 0 );
-has thigh    => ( is => 'rw', default => 0 );
-has waist    => ( is => 'rw', default => 0 );
-has leg      => ( is => 'rw', default => 0 );
-has foot     => ( is => 'rw', default => 0 );
-has hip      => ( is => 'rw', default => 0 );
-has knee     => ( is => 'rw', default => 0 );
+has height => ( is  => 'rw', isa => Int );
+has weight => ( is  => 'rw', isa => Int );
+has gender => ( is  => 'rw', isa => Enum[qw( male female )] );
 
-sub BUILD { shift->refresh }
-
-sub refresh {...}
-
-sub clear {
-    my $self = shift;
-    map { $self->$_(0) }
-        qw/belly topbelly bust arm thigh waist leg foot hip knee/;
-}
-
-use overload '""' => sub {
-    my $self = shift;
-    my $format
-        = $self->gender eq 'male'
-        ? "[남][%s/%s] 중동: %s, 윗배: %s, 가슴: %s, 팔: %s, 허벅지: %s, 허리: %s, 다리: %s, 발: %s"
-        : "[여][%s/%s] 중동: %s, 가슴: %s, 팔: %s, 엉덩이: %s, 허리: %s, 무릎: %s, 발: %s";
-    my @args
-        = $self->gender eq 'male'
-        ? map { $self->$_ || '' }
-        qw/height weight belly topbelly bust arm thigh waist leg foot/
-        : map { $self->$_ || '' }
-        qw/height weight belly bust arm hip waist knee foot/;
-    return sprintf $format, @args;
-};
+requires 'guess';
 
 1;
 
-=pod
+# COPYRIGHT
 
-=encoding utf-8
-
-=head1 NAME
-
-OpenCloset::Size::Guess - 통계를 바탕으로 키/몸무게 로 각 사이즈를 추측
+__END__
 
 =head1 SYNOPSIS
 
-  my $guess = OpenCloset::Size::Guess->new(
-    height => '180',    # cm
-    weight => '80'      # kg
-    gender => 'male'    # or 'female'
-  );
+    package OpenCloset::Size::Guess::MyDriver;
 
-  print "$guess\n";      # [남] 중동: xx, 가슴: xx, 팔: xx, 허벅지: xx, 허리: xx, 다리: xx, 발: xx
-  print "$guess\n";      # [여] 중동: xx, 가슴: xx, 팔: xx, 엉덩이: xx, 허리: xx, 무릎: xx, 발: xx
-  print $guess->belly;   # 중동
-  print $guess->bust;    # 가슴
-  print $guess->arm;     # 팔
-  print $guess->waist;   # 허리
-  print $guess->thigh;   # 허벅지
-  print $guess->hip;     # 엉덩이
-  print $guess->leg;     # 다리
-  print $guess->knee;    # 무릎
-  print $guess->foot;    # 발
+    use Moo;
 
-=cut
+    with 'OpenCloset::Size::Guess::Role::Base';
+
+    sub guess {
+        ...
+    }
+
+
+=head1 DESCRIPTION
+
+The C<OpenCloset::Size::Guess::Role::Base> class provides an abstract
+base class for all L<OpenCloset::Size::Guess> driver classes.
+
+At this time it does not provide any implementation code for drivers
+(although this may change in the future).
+It does serve as something you should sub-class your driver from
+to identify it as a L<OpenCloset::Size::Guess> driver.
+
+Please note that if your driver class not B<not> return true for
+C<$driver->does('OpenCloset::Size::Guess::Role::Base')> then the
+L<OpenCloset::Size::Guess> constructor will refuse to use your class
+as a driver.
+
+
+=attr height
+
+=attr weight
+
+=attr gender
+
+
+=method guess
+
+Returns C<HASHREF> which contains information of body measurment size.
+C<HASHREF> MUST contain following key and value pairs.
+
+=for :list
+* C<arm>: C<SCALAR>.
+* C<belly>: C<SCALAR>.
+* C<bust>: C<SCALAR>.
+* C<foot>: C<SCALAR>.
+* C<hip>: C<SCALAR>.
+* C<knee>: C<SCALAR>.
+* C<leg>: C<SCALAR>.
+* C<thigh>: C<SCALAR>.
+* C<topbelly>: C<SCALAR>.
+* C<waist>: C<SCALAR>.
