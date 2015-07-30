@@ -3,8 +3,6 @@ package OpenCloset::Size::Guess::Role::Base;
 use utf8;
 use Moo::Role;
 
-our $ROE = $ENV{OPENCLOSET_RANGE_OF_ERROR} // 1;    # Range of error -1 ~ +1
-
 has height => ( is => 'rw', required => 1 );
 has weight => ( is => 'rw', required => 1 );
 has gender => (

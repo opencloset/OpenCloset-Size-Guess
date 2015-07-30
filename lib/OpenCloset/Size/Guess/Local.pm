@@ -4,8 +4,9 @@ use Moo;
 
 with 'OpenCloset::Size::Guess::Role::Base';
 
-has schema => ( is => 'ro', required => 1 );
 has cnt    => ( is => 'rw', default  => 0 );
+has range  => ( is => 'ro', default  => 1 );
+has schema => ( is => 'ro', required => 1 );
 
 after clear => sub {
     my $self = shift;
@@ -53,10 +54,10 @@ sub refresh {
                 = qq{UNIX_TIMESTAMP(b.date) > UNIX_TIMESTAMP('2015-05-29 00:00:00') AND DATE_FORMAT(b.date, '%H') < 22 AND ui.gender = ? AND o.height BETWEEN ? AND ? AND o.weight BETWEEN ? AND ?};
             my @bind = (
                 $self->gender,
-                $height - $OpenCloset::Size::Guess::ROE,
-                $height + $OpenCloset::Size::Guess::ROE,
-                $weight - $OpenCloset::Size::Guess::ROE,
-                $weight + $OpenCloset::Size::Guess::ROE
+                $height - $self->range,
+                $height + $self->range,
+                $weight - $self->range,
+                $weight + $self->range,
             );
 
             my $average1 = $self->average( $dbh, $where1, @bind );
