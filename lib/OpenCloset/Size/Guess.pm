@@ -271,7 +271,7 @@ C<HASHREF> MUST contain following key and value pairs.
 =head1 SEE ALSO
 
 =for :list
-* L<OpenCloset::Size::Guess::Local>
+* L<OpenCloset::Size::Guess::DB>
 * L<OpenCloset::Size::Guess::BodyKit>
 * L<SMS::Send>
 * L<Parcel::Track>
