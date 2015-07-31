@@ -1,6 +1,8 @@
 Revision history for {{ $dist->name }}
 
 {{ $NEXT }}
+
+0.003     2015-07-31 13:40:32+09:00 Asia/Seoul
     - Update document
 
 0.002     2015-07-31 02:33:09+09:00 Asia/Seoul
